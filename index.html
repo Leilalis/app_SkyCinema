@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCinema - кинотеатр</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+
+    <header class="nav"> 
+        <a href="#" class="logo">SkyCinema</a> 
+        <nav class="menu"> 
+        <a href="#add">Заказать фильм</a> 
+        <a href="#new">Новинки</a> 
+        <a href="#layout">О нас</a>  
+        <a href="#cont">Контакты</a>
+        <input type="checkbox" id="theme" class="theme-checkbox">
+        <label for="theme" class="theme-toggle">Тема</label>
+        </nav> 
+    </header> 
+
+   <main>
+
+    <h1 class="page-title">Популярное</h1>
+
+    <section class="new" id="new">
+        <article class="movie">
+            <span class="badge">Soon...</span>
+            <h2 class="name">Мстители: Доктор Дум</h2>
+            <img src="doom.png" alt="Мстители: Доктор Дум" width="300" height="450">
+            <p>Дата выхода - 18 декабря 2026 года.</p>
+            <p>Мстители, Люди Икс, Фантастическая четвёрка, вакандцы и Новые Мстители объединяются, чтобы противостоять Доктору Думу.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btnc">Перейти к просмотру</a>
+        </article>
+
+        <article class="movie">
+            <span class="badge">Soon...</span>
+            <h2 class="name">Дюна: Часть третья</h2>
+            <img src="dune.png" alt="Дюна: Часть третья" width="300" height="450">
+            <p>Дата выхода - 18 декабря 2026 года.</p>
+            <p>Пол Атрейдес, ставший императором, сталкивается с последствиями своего восхождения к власти: политические заговоры и священная война, охватившая всю галактику, ставят под угрозу будущее, видения которого являются только ему.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btnc">Перейти к просмотру</a>
+        </article>
+
+        <article class="movie">
+            <span class="badge">New</span>
+            <h2 class="name">Мстители: Финал - Повтор</h2>
+            <img src="encore.png" alt="Мстители: Финал - Повтор" width="300" height="450">
+            <p>Расширенная версия с новыми сценами.</p>
+            <p>Оставшиеся в живых члены команды Мстителей и их союзники должны разработать новый план, который поможет противостоять разрушительным действиям могущественного титана Таноса. Они не могут совершить ошибку.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btn">Перейти к просмотру</a>
+        </article>
+
+        <article class="movie">
+            <span class="badge">New</span>
+            <h2 class="name">Вышка 2</h2>
+             <img src="fall2.png" alt="Вышка 2" width="300" height="450">
+            <p>После трагической гибели на вышке B67 видео Шайло разлетелись по сети, а сама она стала легендой среди экстремалов. Однако ее сестра Джакс так и не смогла смириться с утратой.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btn">Перейти к просмотру</a>
+        </article>
+
+        <article class="movie">
+            <h2 class="name">Одиссея</h2>
+             <img src="odyssey.png" alt="Одиссея" width="300" height="450">
+            <p>После Троянской войны Одиссей, царь Итаки, во главе небольшого войска возвращается домой к своей жене Пенелопе. На своём пути Одиссей сталкивается со множеством испытаний, встречает циклопов, сирен и великанов-людоедов.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btn">Перейти к просмотру</a>
+        </article>
+
+        <article class="movie">
+            <h2 class="name">Человек-паук: Новый день</h2>
+             <img src="smbnd.png" alt="Человек-паук: Новый день" width="300" height="450">
+            <p class="bio">Повзрослевший Питер Паркер полностью посвящает себя борьбе с преступностью, но с ростом угроз и нагрузки на Человека-паука его способности претерпевают странные изменения.</p>
+            <label class="fav">
+                <input type="checkbox">
+                <span>Посмотрю позже</span>
+            </label>
+            <a href="#" class="btn">Перейти к просмотру</a>
+        </article>
+    </section>
+
+    <section class="layout" id="layout">
+    <div class="content">
+        <h2>О нас</h2>
+        <p>SkyCinema — это кинотеатр нового формата, где фильмы можно смотреть как в уютном зале, так и под открытым небом. Мы показываем новинки проката, классику и фильмы под заказ. Работаем ежедневно с 8:00 до 23:00.</p>
+    </div>
+    <aside class="sidebar">
+        <h3>О брони</h3>
+        <p>Бронирование показа — от трёх дней. Отмена бронирования не позже дня от запланированного показа, в противном случае возврата средств не будет.</p>
+    </aside>
+    </section>
+
+    <section class="order-layout" id="add">
+    <aside class="order-info">
+        <h2>О прокате</h2>
+        <p>Заполните заявку, и мы свяжемся с вами в течение 24 часов, чтобы подтвердить дату, время и место показа.</p>
+        <ul>
+            <li>Прокат в помещении или под открытым небом</li>
+            <li>Гибкий выбор даты и времени</li>
+            <li>Поддержка по телефону и почте</li>
+        </ul>
+            <strong>Совет:</strong> укажите в комментарии особые пожелания — звук, свет, рассадку.
+    </aside>
+
+    <div class="order-form-wrap">
+        <h2>Заявка для проката фильма</h2>
+        <form action="#" method="get">
+            <label for="title">Название</label>
+            <input type="text" id="title" name="title" placeholder="Например: Мстители" required>
+
+            <label for="releasedate">Дата выхода</label>
+            <input type="date" id="releasedate" name="releasedate" required>
+
+            <label for="cinema">Место кинотеатра</label>
+            <select id="cinema" name="cinema">
+                <option value="opensky">Под открытым небом</option>
+                <option value="closet">В помещении</option>
+            </select>
+
+            <label for="rundate">Дата проката</label>
+            <input type="date" id="rundate" name="rundate" required>
+
+            <label for="time">Время проката</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="email">Почта</label>
+            <input type="email" id="email" name="email" placeholder="email@example.com" required>
+
+            <label for="tel">Телефон</label>
+            <input type="tel" id="tel" name="tel" placeholder="+7 (999) 786-54-32" required>
+
+            <label for="comm">Комментарий</label>
+            <textarea id="comm" name="comm" rows="3" cols="40" placeholder="Особые пожелания"></textarea>
+
+            <div class="form-actions">
+                <button type="submit" class="btn1">Добавить</button>
+                <button type="reset" class="btn1">Очистить</button>
+            </div>
+        </form>
+    </div>
+    </section>
+  </main>
+
+    <footer id="cont">
+        <p>&copy; 2026, Лейла Мустафаева · ул. Марджани дом 86 · <a href="mailto:dorelidolai@gmail.com">dorelidolai@gmail.com</a></p>
+    </footer>
+<a href="#" class="scroll-top">↑</a>
+
+<script>
+    const btn = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', () => {
+        btn.style.opacity = window.scrollY > 300 ? '1' : '0';
+        btn.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
+    });
+</script>
+</body>
+</html>
