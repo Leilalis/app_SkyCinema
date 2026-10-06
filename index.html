@@ -16,8 +16,8 @@
         <a href="#new">Новинки</a> 
         <a href="#layout">О нас</a>  
         <a href="#cont">Контакты</a>
-        <input type="checkbox" id="theme" class="theme-checkbox">
-        <label for="theme" class="theme-toggle">Тема</label>
+        <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">Тема</button>
+
         </nav> 
     </header> 
 
@@ -25,8 +25,17 @@
 
     <h1 class="page-title">Популярное</h1>
 
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="soon">Скоро выйдет</button>
+        <button class="filter-btn" data-filter="new">Новое</button>
+        <button class="filter-btn" data-filter="popular">Хит</button>
+    </div>
+
+    <p class="filter-count">Показано: <span id="filterCount">0</span></p>
+
     <section class="new" id="new">
-        <article class="movie">
+        <article class="movie" data-category="soon">
             <span class="badge">Soon...</span>
             <h2 class="name">Мстители: Доктор Дум</h2>
             <img src="doom.png" alt="Мстители: Доктор Дум" width="300" height="450">
@@ -39,7 +48,7 @@
             <a href="#" class="btnc">Перейти к просмотру</a>
         </article>
 
-        <article class="movie">
+        <article class="movie" data-category="soon">
             <span class="badge">Soon...</span>
             <h2 class="name">Дюна: Часть третья</h2>
             <img src="dune.png" alt="Дюна: Часть третья" width="300" height="450">
@@ -52,7 +61,7 @@
             <a href="#" class="btnc">Перейти к просмотру</a>
         </article>
 
-        <article class="movie">
+        <article class="movie" data-category="new">
             <span class="badge">New</span>
             <h2 class="name">Мстители: Финал - Повтор</h2>
             <img src="encore.png" alt="Мстители: Финал - Повтор" width="300" height="450">
@@ -65,7 +74,7 @@
             <a href="#" class="btn">Перейти к просмотру</a>
         </article>
 
-        <article class="movie">
+        <article class="movie" data-category="new">
             <span class="badge">New</span>
             <h2 class="name">Вышка 2</h2>
              <img src="fall2.png" alt="Вышка 2" width="300" height="450">
@@ -77,7 +86,7 @@
             <a href="#" class="btn">Перейти к просмотру</a>
         </article>
 
-        <article class="movie">
+        <article class="movie" data-category="popular">
             <h2 class="name">Одиссея</h2>
              <img src="odyssey.png" alt="Одиссея" width="300" height="450">
             <p>После Троянской войны Одиссей, царь Итаки, во главе небольшого войска возвращается домой к своей жене Пенелопе. На своём пути Одиссей сталкивается со множеством испытаний, встречает циклопов, сирен и великанов-людоедов.</p>
@@ -88,7 +97,7 @@
             <a href="#" class="btn">Перейти к просмотру</a>
         </article>
 
-        <article class="movie">
+        <article class="movie" data-category="popular">
             <h2 class="name">Человек-паук: Новый день</h2>
              <img src="smbnd.png" alt="Человек-паук: Новый день" width="300" height="450">
             <p class="bio">Повзрослевший Питер Паркер полностью посвящает себя борьбе с преступностью, но с ростом угроз и нагрузки на Человека-паука его способности претерпевают странные изменения.</p>
@@ -165,14 +174,7 @@
     <footer id="cont">
         <p>&copy; 2026, Лейла Мустафаева · ул. Марджани дом 86 · <a href="mailto:dorelidolai@gmail.com">dorelidolai@gmail.com</a></p>
     </footer>
-<a href="#" class="scroll-top">↑</a>
-
-<script>
-    const btn = document.querySelector('.scroll-top');
-    window.addEventListener('scroll', () => {
-        btn.style.opacity = window.scrollY > 300 ? '1' : '0';
-        btn.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
-    });
-</script>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</button>
+<script src="script.js"></script>
 </body>
 </html>
