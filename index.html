@@ -11,14 +11,28 @@
 
     <header class="nav"> 
         <a href="#" class="logo">SkyCinema</a> 
+
+        <div class="overlay" id="overlay"></div>
+
+        <nav class="mobile-nav" id="mobileNav">
+        <a href="#new">Главная</a>
+        <a href="#layout">О нас</a> 
+        <a href="#add">Заказать фильм</a> 
+        <a href="#cont">Контакты</a>
+        </nav>
+
         <nav class="menu"> 
         <a href="#add">Заказать фильм</a> 
         <a href="#new">Новинки</a> 
         <a href="#layout">О нас</a>  
         <a href="#cont">Контакты</a>
-        <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">Тема</button>
-
         </nav> 
+        <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">Тема</button>
     </header> 
 
    <main>

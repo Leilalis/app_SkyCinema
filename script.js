@@ -1,5 +1,6 @@
 console.log("Сайт подключён к JavaScript!");
 
+/* тема*/ 
 const themeBtn = document.querySelector("#themeBtn");
 
 function getSavedTheme() {
@@ -27,6 +28,7 @@ themeBtn.addEventListener("click", () => {
     saveTheme(isDark ? "dark" : "light");
 });
 
+/* вверх */
 const scrollTopBtn = document.querySelector("#scrollTopBtn");
 
 window.addEventListener("scroll", () => {
@@ -44,6 +46,7 @@ scrollTopBtn.addEventListener("click", () => {
     });
 });
 
+/* фильтры */
 const filterButtons = document.querySelectorAll(".filter-btn");
 const movies = document.querySelectorAll(".movie");
 const filterCount = document.querySelector("#filterCount");
@@ -76,3 +79,43 @@ filterButtons.forEach((button) => {
         filterMovies(category);
     });
 })
+
+/* бургер */
+const burgerBtn = document.querySelector("#burgerBtn");
+const mobileNav = document.querySelector("#mobileNav");
+const overlay = document.querySelector("#overlay");
+
+function openMenu() {
+    mobileNav.classList.add("open");
+    burgerBtn.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden"; 
+}
+
+function closeMenu() {
+    mobileNav.classList.remove("open");
+    burgerBtn.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = ""; 
+}
+
+burgerBtn.addEventListener("click", () => {
+    if (mobileNav.classList.contains("open")) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
+
+const mobileLinks = mobileNav.querySelectorAll("a");
+mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+});
+
+overlay.addEventListener("click", closeMenu);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileNav.classList.contains("open")) {
+        closeMenu();
+    }
+});
