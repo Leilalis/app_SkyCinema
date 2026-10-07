@@ -96,20 +96,8 @@ header.nav {
 }
 
 .mobile-nav a:hover {
-    color: var(--primary, #667eea);
+    color: var(--btn-bg, #667eea);
     transform: translateX(5px);
-}
-
-.mobile-btn {
-    margin-top: 20px;
-    padding: 14px 32px;
-    background: var(--primary, #667eea);
-    color: white !important;
-    border-radius: 50px;
-}
-
-.mobile-btn:hover {
-    filter: brightness(0.9);
 }
 
 .burger {
@@ -129,7 +117,7 @@ header.nav {
     display: block;
     width: 100%;
     height: 3px;
-    background: var(--text, #333);
+    background: var(--btn-bg, #333);
     border-radius: 3px;
     transition: transform 0.3s, opacity 0.3s;
 }
@@ -574,7 +562,8 @@ footer {
 a {
     text-decoration: none;
     color: var(--text-dark);
-} 
+}
+
 @media (max-width: 900px) {
     .new {
         grid-template-columns: repeat(2, 1fr);
