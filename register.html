@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="register.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+
+    <header class="nav"> 
+        <a href="#" class="logo">SkyCinema</a> 
+
+        <div class="overlay" id="overlay"></div>
+
+        <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Главная</a>
+        </nav>
+
+        <nav class="menu"> 
+        <a href="index.html">Главная</a>
+        </nav> 
+        <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">Тема</button>
+    </header> 
+
+    <main class="register-main">
+    <form class="register-form" id="registerForm" novalidate>
+        <h1>Регистрация</h1>
+
+        <div class="form-group">
+            <label for="username">Имя пользователя</label>
+            <input type="text" id="username" autofocus placeholder="username" autocomplete="username">
+            <small class="error" id="usernameError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="email@example.com" autocomplete="email">
+            <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Минимум 8 символов">
+                <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+            </div>
+            <div class="strength-bar">
+                <div class="strength-fill" id="strengthFill"></div>
+            </div>  
+            <p class="strength-text" id="strengthText">Введите пароль</p>
+            <small class="error" id="passwordError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm">Подтверждение пароля</label>
+            <input type="password" id="confirm" placeholder="Повторите пароль" autocomplete="new-password">
+            <small class="error" id="confirmError"></small>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+            <input type="checkbox" id="terms">
+            <span>Я согласен с <a href="#">условиями обработки</a></span>
+            </label>
+            <small class="error" id="termsError"></small>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>
+           <span class="btn-text">Зарегистрироваться</span>
+           <span class="btn-spinner"></span>
+        </button>
+
+        <p class="form-footer">
+            Уже есть аккаунт? <a href="login.html">Войти</a>
+        </p>
+    </form>
+    </main>
+
+    
+    <footer id="cont">
+        <p>&copy; 2026, Лейла Мустафаева · ул. Марджани дом 86 · <a href="mailto:dorelidolai@gmail.com">dorelidolai@gmail.com</a></p>
+    </footer>
+    
+    <div class="modal-overlay" id="successModal">
+    <div class="modal">
+        <div class="modal-icon">✅</div>
+        <h2>Регистрация успешна!</h2>
+        <p>Добро пожаловать на наш сайт.</p>
+        <button class="modal-btn" id="modalClose">Продолжить</button>
+    </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

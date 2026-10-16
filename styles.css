@@ -134,12 +134,19 @@ header.nav {
     transform: translateY(-10px) rotate(-45deg);
 }
 
-.menu a:hover {
-    color: var(--btn-bg);
+.menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 
 .menu a {
     color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: var(--btn-bg);
 }
 
 .logo { 
