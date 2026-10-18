@@ -28,6 +28,46 @@ themeBtn.addEventListener("click", () => {
     saveTheme(isDark ? "dark" : "light");
 });
 
+/* бургер */
+const burgerBtn = document.querySelector("#burgerBtn");
+const mobileNav = document.querySelector("#mobileNav");
+const overlay = document.querySelector("#overlay");
+
+function openMenu() {
+    mobileNav.classList.add("open");
+    burgerBtn.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden"; 
+}
+
+function closeMenu() {
+    mobileNav.classList.remove("open");
+    burgerBtn.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = ""; 
+}
+
+burgerBtn.addEventListener("click", () => {
+    if (mobileNav.classList.contains("open")) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
+
+const mobileLinks = mobileNav.querySelectorAll("a");
+mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+});
+
+overlay.addEventListener("click", closeMenu);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileNav.classList.contains("open")) {
+        closeMenu();
+    }
+});
+
 /* элементы формы */
 
 const form = document.querySelector("#registerForm");
@@ -48,6 +88,20 @@ const termsError = document.querySelector("#termsError");
 
 const successModal = document.querySelector("#successModal");
 const modalClose = document.querySelector("#modalClose");
+
+/* показать ошибку */
+const showError = (input, errorElement, message) => {
+    input.classList.add("error");          // Красная рамка
+    input.classList.remove("success");      // Убрать зелёную
+    errorElement.textContent = message;     // Показать текст ошибки
+};
+
+/* показать успех */
+const showSuccess = (input, errorElement) => {
+    input.classList.remove("error");        // Убрать красную
+    input.classList.add("success");         // Зелёная рамка
+    errorElement.textContent = "";          // Очистить текст
+};
 
 const validateUsername = (value) => {
     /* убираем поля*/
@@ -127,6 +181,15 @@ const validateConfirm = (value) => {
     return { valid: true, message: "" };
 };
 
+/* мягкая валидация */
+
+let touched = {
+    username: false,
+    email: false,
+    password: false,
+    confirm: false
+};
+
 const togglePassword = document.querySelector("#togglePassword");
 
 togglePassword.addEventListener("click", () => {
@@ -138,20 +201,6 @@ togglePassword.addEventListener("click", () => {
         togglePassword.textContent = "👁️";
     }
 });
-
-/* показать ошибку */
-const showError = (input, errorElement, message) => {
-    input.classList.add("error");          // Красная рамка
-    input.classList.remove("success");      // Убрать зелёную
-    errorElement.textContent = message;     // Показать текст ошибки
-};
-
-/* показать успех */
-const showSuccess = (input, errorElement) => {
-    input.classList.remove("error");        // Убрать красную
-    input.classList.add("success");         // Зелёная рамка
-    errorElement.textContent = "";          // Очистить текст
-};
 
 /* показать окно */
 const showModal = () => {
@@ -182,6 +231,15 @@ const setLoading = (isLoading) => {
     }
 };
 
+const validateSingleField = (input, errorElement, validator) => {
+    const result = validator(input.value);
+    if (result.valid) {
+        showSuccess(input, errorElement);
+    } else {
+        showError(input, errorElement, result.message);
+    }
+};
+
 const validateForm = () => {
     /* проверка полей */
     const r1 = validateUsername(username.value);
@@ -209,10 +267,6 @@ const validateForm = () => {
     termsError.textContent = r5.message;
     }
 
-    terms.addEventListener("change", () => {
-    validateForm();
-    });
-
     /* все ли поля валидны */
     const allValid = r1.valid && r2.valid && r3.valid && r4.valid && r5.valid;
     
@@ -220,6 +274,17 @@ const validateForm = () => {
     submitBtn.disabled = !allValid;
     
     return allValid;
+};
+
+const updateSubmitState = () => {
+    const r1 = validateUsername(username.value);
+    const r2 = validateEmail(email.value);
+    const r3 = validatePassword(password.value);
+    const r4 = validateConfirm(confirm.value);
+    const r5 = validateTerms();
+
+    const allValid = r1.valid && r2.valid && r3.valid && r4.valid && r5.valid;
+    submitBtn.disabled = !allValid;
 };
 
 /* сила пароля */
@@ -264,8 +329,52 @@ const validateTerms = () => {
 };
 
 /* проверка при вводе */
-[username, email, password, confirm].forEach((input) => {
-    input.addEventListener("input", validateForm);
+username.addEventListener("input", () => {
+    if (touched.username) {
+        validateSingleField(username, usernameError, validateUsername);
+    }
+    updateSubmitState();
+});
+username.addEventListener("blur", () => {
+    touched.username = true;
+    validateSingleField(username, usernameError, validateUsername);
+    updateSubmitState();
+});
+
+email.addEventListener("input", () => {
+    if (touched.email) {
+        validateSingleField(email, emailError, validateEmail);
+    }
+    updateSubmitState();
+});
+email.addEventListener("blur", () => {
+    touched.email = true;
+    validateSingleField(email, emailError, validateEmail);
+    updateSubmitState();
+});
+
+password.addEventListener("input", () => {
+    if (touched.password) {
+        validateSingleField(password, passwordError, validatePassword);
+    }
+    updateSubmitState();
+});
+password.addEventListener("blur", () => {
+    touched.password = true;
+    validateSingleField(password, passwordError, validatePassword);
+    updateSubmitState();
+});
+
+confirm.addEventListener("input", () => {
+    if (touched.confirm) {
+        validateSingleField(confirm, confirmError, validateConfirm);
+    }
+    updateSubmitState();
+});
+confirm.addEventListener("blur", () => {
+    touched.confirm = true;
+    validateSingleField(confirm, confirmError, validateConfirm);
+    updateSubmitState();
 });
 
 
@@ -328,5 +437,13 @@ const loadDraft = () => {
     });
 });
 
+terms.addEventListener("change", () => {
+    const r5 = validateTerms();
+    if (r5.valid) termsError.textContent = "";
+    else termsError.textContent = r5.message;
+    
+    updateSubmitState();
+});
+
 loadDraft();
-validateForm();
+updateSubmitState();

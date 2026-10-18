@@ -15,21 +15,25 @@
         <div class="overlay" id="overlay"></div>
 
         <nav class="mobile-nav" id="mobileNav">
-        <a href="#new">Главная</a>
-        <a href="#layout">О нас</a> 
         <a href="register.html">Регистрация</a>
         <a href="login.html">Войти</a>
+        <a href="#new">Новинки</a> 
         <a href="#add">Заказать фильм</a> 
+        <a href="shop.html">Магазин</a>
+        <a href="#layout">О нас</a> 
         <a href="#cont">Контакты</a>
+        <a href="#catalog">Каталог</a>
         </nav>
 
         <nav class="menu"> 
         <a href="register.html">Регистрация</a>
         <a href="login.html">Войти</a>
-        <a href="#add">Заказать фильм</a> 
         <a href="#new">Новинки</a> 
+        <a href="#add">Заказать фильм</a> 
+        <a href="shop.html">Магазин</a>
         <a href="#layout">О нас</a>  
-        <a href="#cont">Контакты</a>
+        <a href="#layout">Контакты</a>
+        <a href="#catalog">Каталог</a>
         </nav> 
         <button class="burger" id="burgerBtn" aria-label="Открыть меню">
             <span></span>
@@ -41,7 +45,15 @@
 
    <main>
 
+    <section class="slider-section" id="slider">
     <h1 class="page-title">Популярное</h1>
+    <div class="slider" id="sliderEl">
+        <div class="slider__track" id="sliderTrack"></div>
+        <button class="slider__btn slider__prev" id="sliderPrev" aria-label="Предыдущий слайд">‹</button>
+        <button class="slider__btn slider__next" id="sliderNext" aria-label="Следующий слайд">›</button>
+        <div class="slider__dots" id="sliderDots"></div>
+    </div>
+    </section>
 
     <div class="filters">
         <button class="filter-btn active" data-filter="all">Все</button>
@@ -130,11 +142,13 @@
     <section class="layout" id="layout">
     <div class="content">
         <h2>О нас</h2>
-        <p>SkyCinema — это кинотеатр нового формата, где фильмы можно смотреть как в уютном зале, так и под открытым небом. Мы показываем новинки проката, классику и фильмы под заказ. Работаем ежедневно с 8:00 до 23:00.</p>
+        <p>SkyCinema — это кинотеатр нового формата, где фильмы можно смотреть как в уютном зале, так и под открытым небом. Мы показываем новинки проката, классику и фильмы под заказ. Работаем ежедневно с 8:00 до 23:00. Бронирование показа — от трёх дней. Отмена бронирования не позже дня от запланированного показа, в противном случае возврата средств не будет.</p>
     </div>
     <aside class="sidebar">
-        <h3>О брони</h3>
-        <p>Бронирование показа — от трёх дней. Отмена бронирования не позже дня от запланированного показа, в противном случае возврата средств не будет.</p>
+        <h3>Контакты</h3>
+        <p>Телефон: +7 999 (747) 07 14</p>
+        <p>Email: dorelidolai@gmail.com</p>
+        <p>Адрес офиса: ул. Марджани дом 86</p>
     </aside>
     </section>
 
@@ -187,8 +201,23 @@
         </form>
     </div>
     </section>
+
+    <section class="catalog-section" id="catalog">
+    <h1 class="page-title">Каталог фильмов</h1>
+
+    <div class="pagination-search">
+        <input type="text" id="searchInput" placeholder="Поиск по названию..." class="search-input">
+    </div>
+    <div class="pagination-list" id="paginationList"></div>
+    <div class="pagination-controls">
+        <button class="page-nav-btn" id="prevPageBtn">Пред.</button>
+        <div class="page-numbers" id="pageNumbers"></div>
+        <button class="page-nav-btn" id="nextPageBtn">След.</button>
+    </div>
+    </section>  
+
   </main>
-    <footer id="cont">
+    <footer>
         <p>&copy; 2026, Лейла Мустафаева · ул. Марджани дом 86 · <a href="mailto:dorelidolai@gmail.com">dorelidolai@gmail.com</a></p>
     </footer>
 <button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</button>

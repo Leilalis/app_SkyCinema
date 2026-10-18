@@ -28,6 +28,46 @@ themeBtn.addEventListener("click", () => {
     saveTheme(isDark ? "dark" : "light");
 });
 
+/* бургер */
+const burgerBtn = document.querySelector("#burgerBtn");
+const mobileNav = document.querySelector("#mobileNav");
+const overlay = document.querySelector("#overlay");
+
+function openMenu() {
+    mobileNav.classList.add("open");
+    burgerBtn.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden"; 
+}
+
+function closeMenu() {
+    mobileNav.classList.remove("open");
+    burgerBtn.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = ""; 
+}
+
+burgerBtn.addEventListener("click", () => {
+    if (mobileNav.classList.contains("open")) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
+
+const mobileLinks = mobileNav.querySelectorAll("a");
+mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+});
+
+overlay.addEventListener("click", closeMenu);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileNav.classList.contains("open")) {
+        closeMenu();
+    }
+});
+
 /* элементы формы */
 
 const form = document.querySelector("#loginForm");
@@ -116,6 +156,27 @@ const setLoading = (isLoading) => {
     }
 };
 
+const validateSingleField = (input, errorElement, validator) => {
+    const result = validator(input.value);
+    if (result.valid) {
+        showSuccess(input, errorElement);
+    } else {
+        showError(input, errorElement, result.message);
+    }
+};
+
+let touched = {
+    email: false,
+    password: false
+};
+
+const updateSubmitState = () => {
+    const r1 = validateEmail(email.value);
+    const r2 = validatePassword(password.value);
+    const allValid = r1.valid && r2.valid;
+    submitBtn.disabled = !allValid;
+};
+
 const validateForm = () => {
     const r1 = validateEmail(email.value);
     const r2 = validatePassword(password.value);
@@ -132,8 +193,28 @@ const validateForm = () => {
     return allValid;
 };
 
-[email, password].forEach((input) => {
-    input.addEventListener("input", validateForm);
+email.addEventListener("input", () => {
+    if (touched.email) {
+        validateSingleField(email, emailError, validateEmail);
+    }
+    updateSubmitState();
+});
+email.addEventListener("blur", () => {
+    touched.email = true;
+    validateSingleField(email, emailError, validateEmail);
+    updateSubmitState();
+});
+
+password.addEventListener("input", () => {
+    if (touched.password) {
+        validateSingleField(password, passwordError, validatePassword);
+    }
+    updateSubmitState();
+});
+password.addEventListener("blur", () => {
+    touched.password = true;
+    validateSingleField(password, passwordError, validatePassword);
+    updateSubmitState();
 });
 
 form.addEventListener("submit", async (event) => {
@@ -158,4 +239,4 @@ form.addEventListener("submit", async (event) => {
     });
 });
 
-validateForm();
+updateSubmitState();
