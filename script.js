@@ -122,11 +122,11 @@ document.addEventListener("keydown", (event) => {
 
 /* слайдер */
 const slides = [
-    { img: "doom.png",    title: "Мстители: Доктор Дум",    text: "Дата выхода — 18 декабря 2026 года." },
-    { img: "dune.png",    title: "Дюна: Часть третья",       text: "Пол Атрейдес сталкивается с последствиями власти." },
-    { img: "encore.png",  title: "Мстители: Финал — Повтор", text: "Расширенная версия с новыми сценами." },
-    { img: "fall2.png",   title: "Вышка 2",                  text: "Сестра Джакс не смирилась с утратой." },
-    { img: "odyssey.png", title: "Одиссея",                  text: "Одиссей возвращается домой после войны." }
+    { video: "doomteas.mp4", poster: "doomtr.png", title: "Мстители: Доктор Дум", text: "Все герои объединяться чтобы противостоять Доктору Думу. Дата выхода — 18 декабря 2026 года." },
+    { video: "duneteas.mp4", poster: "dunetr.png", title: "Дюна: Часть третья", text: "Пол Атрейдес сталкивается с последствиями власти. Дата выхода — 18 декабря 2026 года." },
+    { video: "jumanji4teas.mp4", poster: "jumanji4tr.png", title: "Джуманджи: Великий побег", text: "Правила игры полностью сломаны, и теперь «Джуманджи» выходит в реальный мир! Дата выхода — 24 декабря 2026 года." },
+    { video: "werwulfteas.mp4", poster: "werwulftr.png", title: "Оборотень", text: "Глухую деревню охватывает ужас: в окрестных лесах объявляется чудовище. Дата выхода — 25 декабря 2026 года." },
+    { video: "remainteas.mp4", poster: "remaintr.png", title: "Останься", text: "Чертеж жизни легко разрушить, когда в него вмешивается загадочная незнакомка. Дата выхода — 4 февраля 2027 года." },
 ];
 
 let current = 0;
@@ -137,59 +137,112 @@ const btnNext = document.getElementById("sliderNext");
 const btnPrev = document.getElementById("sliderPrev");
 const sliderDots = document.getElementById("sliderDots");
 
-/* разметка слайдов и точек */
-sliderTrack.innerHTML = slides.map((s, i) => // превращает каждый объект в строку HTML
-    `<div class="slider__slide ${i === 0 ? "active" : ""}"> 
-        <img src="${s.img}" alt="${s.title}" class="slider__img">
+/* разметка слайдов */
+sliderTrack.innerHTML = slides.map((s, i) => `
+    <div class="slider__slide ${i === 0 ? "active" : ""}">
+        <div class="slider__media">
+            <img class="slider__poster" src="${s.poster}" alt="${s.title}">
+            <video class="slider__video"
+                   src="${s.video}"
+                   muted
+                   loop
+                   playsinline
+                   preload="metadata"></video>
+            <button class="slider__sound" type="button" aria-label="Включить звук">🔇</button>
+        </div>
         <div class="slider__caption">
             <h2>${s.title}</h2>
             <p>${s.text}</p>
         </div>
     </div>
-`).join(""); // склеивает массив строк в одну строку без разделителей
+`).join("");
 
-sliderDots.innerHTML = slides.map((_, i) => // записывает HTML внутрь контейнера, те браузер создаёт DOM (древовидной структуры объектов)
+/* точки */
+sliderDots.innerHTML = slides.map((_, i) =>
     `<button class="slider__dot ${i === 0 ? "active" : ""}" data-index="${i}"></button>`
 ).join("");
 
-/* обновление активного слайда */
+/* навигация */
 function updateSlider() {
     const allSlides = sliderTrack.querySelectorAll(".slider__slide");
     const allDots   = sliderDots.querySelectorAll(".slider__dot");
-    for (let i = 0; i < allSlides.length; i++) {
-        allSlides[i].classList.toggle("active", i === current);
-        allDots[i].classList.toggle("active", i === current);
-    }
+
+    allSlides.forEach((slide, i) => {
+        const isActive = i === current;
+        slide.classList.toggle("active", isActive);
+        allDots[i].classList.toggle("active", isActive);
+
+        const video = slide.querySelector(".slider__video");
+        const soundBtn = slide.querySelector(".slider__sound");
+        if (video && !isActive) {
+            video.pause();
+            video.currentTime = 0;
+            video.muted = true;
+            if (soundBtn) soundBtn.textContent = "🔇";
+        }
+    });
 }
 
 function goToSlide(index) {
-    current = (index + slides.length) % slides.length; // зацикливание
+    current = (index + slides.length) % slides.length;
     updateSlider();
 }
 function nextSlide() { goToSlide(current + 1); }
 function prevSlide() { goToSlide(current - 1); }
 
-/* кнопки */
 btnNext.addEventListener("click", nextSlide);
 btnPrev.addEventListener("click", prevSlide);
 
-/* точки */
 sliderDots.addEventListener("click", (e) => {
     const dot = e.target.closest(".slider__dot");
     if (dot) goToSlide(Number(dot.dataset.index));
 });
 
-/* автопрокрутка с остановкой при наведении */
-let timer = setInterval(nextSlide, 3000);
-sliderEl.addEventListener("mouseenter", () => clearInterval(timer));
-sliderEl.addEventListener("mouseleave", () => {
-    clearInterval(timer);
-    timer = setInterval(nextSlide, 3000);
+/* видео при наведении, звук по кнопке */
+sliderTrack.querySelectorAll(".slider__slide").forEach((slideEl) => {
+    const video    = slideEl.querySelector(".slider__video");
+    const soundBtn = slideEl.querySelector(".slider__sound");
+    if (!video) return;
+
+    slideEl.addEventListener("mouseenter", () => {
+        video.play().catch(() => {});
+    });
+
+    slideEl.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+        video.muted = true;
+        if (soundBtn) soundBtn.textContent = "🔇";
+    });
+
+    if (soundBtn) {
+        soundBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            soundBtn.textContent = video.muted ? "🔇" : "🔊";
+            if (!video.muted) video.play().catch(() => {});
+        });
+    }
 });
+
+const AUTO_DELAY = 3000;
+let timer = null;
+
+function startAuto() {
+    stopAuto();
+    timer = setInterval(nextSlide, AUTO_DELAY);
+}
+function stopAuto() {
+    if (timer) { clearInterval(timer); timer = null; }
+}
+
+sliderEl.addEventListener("mouseenter", stopAuto);
+sliderEl.addEventListener("mouseleave", startAuto);
+startAuto();
 
 /* свайп */
 let startX = 0;
-sliderEl.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+sliderEl.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; });
 sliderEl.addEventListener("touchend", (e) => {
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 50) dx < 0 ? nextSlide() : prevSlide();
